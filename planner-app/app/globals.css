@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-inset-top: env(safe-area-inset-top, 0px);
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+html {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
+    'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+  @apply bg-ios-gray-6 dark:bg-gray-950 text-gray-900 dark:text-white;
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dark body {
+  background-color: #1c1c1e;
+}
+
+/* Scrollbar hiding */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* iOS-style card */
+.ios-card {
+  @apply bg-white dark:bg-gray-800 rounded-2xl shadow-ios-sm;
+}
+
+/* Bottom nav safe area */
+.bottom-nav {
+  padding-bottom: calc(0.5rem + var(--safe-area-inset-bottom));
+}
+
+/* Timeline task block */
+.task-block {
+  position: absolute;
+  left: 68px;
+  right: 8px;
+  border-radius: 10px;
+  padding: 4px 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  touch-action: none;
+}
+
+.task-block:active {
+  transform: scale(0.97);
+}
+
+/* Star rating */
+.star-active {
+  color: #FFCC00;
+}
+.star-inactive {
+  color: #D1D1D6;
+}
+
+/* Alarm pulse animation */
+@keyframes alarm-ring {
+  0%, 100% { transform: rotate(-5deg); }
+  25% { transform: rotate(5deg); }
+  50% { transform: rotate(-3deg); }
+  75% { transform: rotate(3deg); }
+}
+
+.alarm-icon {
+  animation: alarm-ring 0.5s ease-in-out infinite;
+}
+
+/* Smooth page transitions */
+.page-enter {
+  animation: fade-in 0.2s ease-out;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Modal backdrop */
+.modal-backdrop {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Toggle switch */
+.toggle-switch {
+  @apply relative inline-block w-12 h-7;
+}
+
+.toggle-switch input {
+  @apply opacity-0 w-0 h-0;
+}
+
+.toggle-slider {
+  @apply absolute inset-0 rounded-full cursor-pointer transition-all duration-300;
+  background-color: #D1D1D6;
+}
+
+.toggle-slider::before {
+  content: '';
+  @apply absolute h-5 w-5 left-1 bottom-1 bg-white rounded-full transition-all duration-300;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+input:checked + .toggle-slider {
+  background-color: #34C759;
+}
+
+input:checked + .toggle-slider::before {
+  transform: translateX(20px);
+}
