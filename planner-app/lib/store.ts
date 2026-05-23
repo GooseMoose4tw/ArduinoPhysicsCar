@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { v4 as uuidv4 } from 'crypto';
 import { Subject, Preset, ScheduledTask, AppSettings } from './types';
 
 // Simple UUID generator without crypto dependency
@@ -207,9 +206,6 @@ interface PlannerStore {
   // Settings
   updateSettings: (updates: Partial<AppSettings>) => void;
 }
-
-// Suppress unused import warning
-void uuidv4;
 
 export const usePlannerStore = create<PlannerStore>()(
   persist(
